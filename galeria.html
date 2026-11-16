@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galería - Max Verstappen</title>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+        var theme = saved || (prefersLight ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <style>
+      .gallery-page { max-width: 1200px; margin: 0 auto; padding: 28px 16px 56px; }
+      .gallery-page-header { text-align: center; margin-bottom: 22px; }
+      .gallery-page-header h1 { margin: 0 0 8px; font-weight: 800; }
+      .gallery-page-header p { margin: 0; color: var(--text-body, #cbd5e1); font-size: 1.05rem; }
+      .gallery-back { display: inline-block; margin-bottom: 18px; padding: 10px 18px; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: var(--text-light, #fff); text-decoration: none; background: var(--bg-dark); transition: all .2s ease; }
+      .gallery-back:hover, .gallery-back:focus { color: var(--accent-yellow, #ffe600); border-color: var(--accent-yellow, #ffe600); text-decoration: none; }
+      #maxGalleryCarousel { border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.08); background: var(--bg-dark); }
+      #maxGalleryCarousel .item { background: var(--bg-dark); }
+      #maxGalleryCarousel .item img { width: 100%; height: min(70vh, 620px); object-fit: contain; background: var(--bg-dark); padding: 8px 8px 0; }
+      #maxGalleryCarousel .carousel-caption { background: linear-gradient(transparent 0%, rgba(7,0,20,.55) 30%, rgba(7,0,20,.94) 100%); left: 0; right: 0; bottom: 0; padding: 50px 24px 22px; text-align: left; }
+      #maxGalleryCarousel .carousel-caption h3 { color: var(--accent-yellow, #ffe600); font-weight: 800; margin: 0 0 4px; font-size: 1.6rem; }
+      #maxGalleryCarousel .carousel-caption p { margin: 0; font-size: 1.05rem; color: #e5e7eb; }
+      #maxGalleryCarousel .carousel-indicators { bottom: 8px; }
+      #maxGalleryCarousel .carousel-indicators li { border-color: rgba(255,255,255,.5); }
+      #maxGalleryCarousel .carousel-indicators .active { background-color: var(--accent-yellow, #ffe600); border-color: var(--accent-yellow, #ffe600); }
+      #maxGalleryCarousel .carousel-control { width: 8%; background-image: none !important; opacity: .85; }
+      #maxGalleryCarousel .carousel-control:hover { opacity: 1; }
+      @media (max-width: 767px) { 
+        #maxGalleryCarousel .item img { height: 52vh; padding: 4px; } 
+        #maxGalleryCarousel .carousel-caption { padding: 36px 14px 16px; }
+        #maxGalleryCarousel .carousel-caption h3 { font-size: 1.2rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gallery-page">
+      <a class="gallery-back" href="index.html">← Volver al inicio</a>
+      <div class="gallery-page-header">
+        <h1>Galería de Max Verstappen</h1>
+        <p>Momentos icónicos, monoplazas, victorias y más.</p>
+      </div>
+
+      <div id="maxGalleryCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#maxGalleryCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="1"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="2"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="3"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="4"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="5"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="6"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="7"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="8"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="9"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="10"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="11"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="12"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="13"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="14"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="15"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="16"></li>
+          <li data-target="#maxGalleryCarousel" data-slide-to="17"></li>
+        </ol>
+
+        <div class="carousel-inner" role="listbox">
+          <div class="item active"><img src="max_imagenesyvideos/maxverstappenenmonoplaza.jpg" alt="Max Verstappen en el monoplaza" /><div class="carousel-caption"><h3>En pista</h3><p>Max Verstappen al ataque con su monoplaza.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_celebracion.jpg" alt="Celebración de Max Verstappen" /><div class="carousel-caption"><h3>Celebración</h3><p>Festejo tras una gran actuación.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/casco_simply_lovely.jpg" alt="Casco Simply Lovely" /><div class="carousel-caption"><h3>Simply Lovely</h3><p>El casco y la frase icónica de Max.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/casco_max.jpg" alt="Casco de Max Verstappen" /><div class="carousel-caption"><h3>Casco</h3><p>Diseño y personalidad en el casco.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/redbull-team.jpg" alt="Equipo Red Bull Racing" /><div class="carousel-caption"><h3>Red Bull Racing</h3><p>El equipo de su era en la Fórmula 1.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_equipo.jpg" alt="Max con el equipo" /><div class="carousel-caption"><h3>Trabajo en equipo</h3><p>Max junto al equipo en el paddock.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_imola.jpg" alt="Max en Imola" /><div class="carousel-caption"><h3>Imola</h3><p>Ritmo y precisión en pista.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_españa.jpg" alt="Primera victoria en España" /><div class="carousel-caption"><h3>España 2016</h3><p>Primera victoria histórica con Red Bull.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_campeon_2021.jpg" alt="Campeón 2021" /><div class="carousel-caption"><h3>Campeón 2021</h3><p>La consagración de su primer título mundial.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_debut.jpg" alt="Debut 2015" /><div class="carousel-caption"><h3>Debut 2015</h3><p>El inicio de su carrera en Fórmula 1.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_2016-2020.jpg" alt="Etapa 2016-2020" /><div class="carousel-caption"><h3>2016–2020</h3><p>Años de crecimiento y consolidación.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_2021.jpg" alt="Temporada 2021" /><div class="carousel-caption"><h3>2021</h3><p>La batalla por el primer campeonato.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_2022-2024.jpg" alt="Dominación 2022-2024" /><div class="carousel-caption"><h3>2022–2024</h3><p>Etapa de dominación absoluta.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_2025.jpg" alt="Temporada 2025" /><div class="carousel-caption"><h3>2025</h3><p>Remontada y pelea hasta el final.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_2025_galeria.jpg" alt="Max 2025" /><div class="carousel-caption"><h3>2025 en acción</h3><p>Otra imagen de la temporada 2025.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_2026.jpg" alt="Temporada 2026" /><div class="carousel-caption"><h3>2026</h3><p>Pelea por el subcampeonato.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_pista.jpg" alt="Max en pista" /><div class="carousel-caption"><h3>En la pista</h3><p>Velocidad y enfoque en carrera.</p></div></div>
+          <div class="item"><img src="max_imagenesyvideos/max_kart.jpg" alt="Inicios en karting" /><div class="carousel-caption"><h3>Inicios</h3><p>Los primeros pasos en el karting.</p></div></div>
+        </div>
+
+        <a class="left carousel-control" href="#maxGalleryCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a class="right carousel-control" href="#maxGalleryCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+        </a>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

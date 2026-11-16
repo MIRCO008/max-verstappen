@@ -1,0 +1,11 @@
+# Archivos locales / temporales
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+*.log
+
+# Copias de respaldo y pruebas locales (no forman parte del sitio)
+Respaldo/
+esc-ej/
+WhatsApp Image *.jpeg

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minijuegos - Max Verstappen</title>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var light = window.matchMedia("(prefers-color-scheme: light)").matches;
+        document.documentElement.setAttribute("data-theme", saved || (light ? "light" : "dark"));
+      })();
+    </script>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <a href="index.html" class="navbar-brand">MAX<span>1</span></a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#biografia">Biografía</a></li>
+        <li><a href="index.html#estadisticas">Estadísticas</a></li>
+        <li><a href="index.html#trayectoria">Trayectoria</a></li>
+        <li><a href="index.html#circuitos">Circuitos</a></li>
+        <li><a href="index.html#galeria">Galería</a></li>
+        <li><a href="juegos.html" class="active">🎮 Juegos</a></li>
+        <li><button id="theme-toggle" class="theme-btn" aria-label="Cambiar tema">🌙</button></li>
+      </ul>
+    </nav>
+
+    <header id="inicio">
+      <div class="header-flag-bg"></div>
+      <div class="header-overlay"></div>
+      <div class="header-content">
+        <h1>ZONA DE JUEGOS</h1>
+        <p class="subtitle">pisá a fondo</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <p class="game-intro">
+        Tres minijuegos para poner a prueba tus reflejos, tu memoria y cuánto
+        sabés de Max. Tus mejores marcas quedan guardadas en tu navegador.
+      </p>
+
+      <section id="reflejos">
+        <h2>🚦 Reflejos de Largada</h2>
+        <div class="game-box">
+          <p class="game-desc">
+            Se encienden 5 luces rojas. Cuando se apaguen todas, ¡tocá el botón
+            lo más rápido que puedas! Si lo tocás antes, es salida en falso.
+          </p>
+          <div class="lights" id="lights" aria-hidden="true">
+            <span class="light"></span><span class="light"></span><span class="light"></span><span class="light"></span><span class="light"></span>
+          </div>
+          <button class="game-btn" id="reaction-btn">Empezar</button>
+          <p class="game-msg" id="reaction-msg" aria-live="polite"></p>
+          <p class="game-stats">Mejor tiempo: <span id="reaction-best">--</span></p>
+        </div>
+      </section>
+
+      <section id="memoria">
+        <h2>🧠 Memoria de Boxes</h2>
+        <div class="game-box">
+          <p class="game-desc">Encontrá las 8 parejas de íconos con la menor cantidad de movimientos.</p>
+          <div class="mem-grid" id="mem-grid"></div>
+          <p class="game-msg" id="memory-msg" aria-live="polite"></p>
+          <p class="game-stats">
+            Movimientos: <span id="memory-moves">0</span> · Mejor: <span id="memory-best">--</span>
+          </p>
+          <button class="game-btn" id="memory-reset">Reiniciar</button>
+        </div>
+      </section>
+
+      <section id="trivia">
+        <h2>❓ Trivia: ¿Cuánto sabés de Max?</h2>
+        <div class="game-box" id="quiz-box" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <p>&copy; 2026 Página Fan de Max Verstappen.</p>
+        <div class="footer-links"><a href="index.html" class="footer-social-link">← Volver al inicio</a></div>
+      </div>
+    </footer>
+
+    <script src="js/juegos.js"></script>
+  </body>
+</html>

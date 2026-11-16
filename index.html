@@ -1,0 +1,644 @@
+﻿<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Max Verstappen - Trayectoria en F1</title>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+        var theme = saved || (prefersLight ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <nav class="navbar site-mobile-nav" id="navbar">
+      <a href="#inicio" class="navbar-brand">MAX<span>1</span></a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#inicio">Dashboard</a></li>
+        <li><a href="#biografia">Biografía</a></li>
+        <li><a href="#estadisticas">Estadísticas</a></li>
+        <li><a href="#trayectoria">Trayectoria</a></li>
+        <li><a href="#rivalidad-2021">2021</a></li>
+        <li><a href="#circuitos">Circuitos</a></li>
+        <li><a href="#curiosidades">Curiosidades</a></li>
+        <li><a href="#companeros">Compañeros</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="#juegos">🎮 Juegos</a></li>
+        <li class="nav-actions">
+          <button class="theme-btn sound-btn js-sound-toggle" aria-label="Reproducir sonido" aria-pressed="false">🔊</button>
+          <button class="theme-btn js-theme-toggle" aria-label="Cambiar tema">🌙</button>
+        </li>
+      </ul>
+    </nav>
+
+    <audio id="lovely-audio" preload="none">
+      <source src="max_imagenesyvideos/sonido_motor.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="easter-egg-toast" class="easter-egg-toast" aria-live="polite">Simply Lovely 💙</div>
+
+    <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Imagen ampliada" tabindex="-1">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <button class="modal-nav prev" id="modal-prev" aria-label="Anterior">&#8249;</button>
+      <button class="modal-nav next" id="modal-next" aria-label="Siguiente">&#8250;</button>
+      <div class="modal-wrapper">
+        <img class="modal-content" id="modal-img" alt="Imagen ampliada" />
+        <div id="modal-caption" class="modal-caption"></div>
+      </div>
+    </div>
+
+    <div id="titles-modal" class="modal" role="dialog" aria-modal="true" aria-label="Títulos Mundiales" tabindex="-1">
+      <span class="close-modal" onclick="closeTitlesModal()">&times;</span>
+      <div class="modal-wrapper">
+        <div class="titles-modal-content">
+          <h3>🏆 4 Títulos Mundiales</h3>
+          <ul class="titles-list">
+            <li><span class="titles-year">2021</span><span class="titles-track">Abu Dabi (Yas Marina)</span></li>
+            <li><span class="titles-year">2022</span><span class="titles-track">Japón (Suzuka)</span></li>
+            <li><span class="titles-year">2023</span><span class="titles-track">Catar (Lusail Sprint)</span></li>
+            <li><span class="titles-year">2024</span><span class="titles-track">Las Vegas</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="circuit-map-modal" class="modal" role="dialog" aria-modal="true" aria-label="Mapa del circuito" tabindex="-1">
+      <span class="close-modal" onclick="closeCircuitModal()">&times;</span>
+      <div class="modal-wrapper">
+        <div class="map-caption">
+          <h3 id="circuit-map-title"></h3>
+          <p id="circuit-map-subtitle"></p>
+          <a id="circuit-map-external" href="#" target="_blank" rel="noopener noreferrer" class="map-external-link">Ver en Google Maps ↗</a>
+        </div>
+        <div class="map-frame-wrapper">
+          <iframe id="circuit-map-iframe" title="Mapa del circuito seleccionado" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Volver arriba">↑</button>
+
+    <div class="container-fluid site-shell">
+      <div class="row content">
+        <aside class="col-sm-3 sidenav hidden-xs">
+          <h2 class="sidenav-brand">MAX<span>1</span></h2>
+          <p class="sidenav-subtitle">Trayectoria en F1</p>
+          <ul class="nav nav-pills nav-stacked sidenav-links">
+            <li><a href="#inicio">📊 Dashboard</a></li>
+            <li><a href="#biografia">📖 Biografía</a></li>
+            <li><a href="#estadisticas">📈 Estadísticas</a></li>
+            <li><a href="#trayectoria">🕒 Trayectoria</a></li>
+            <li><a href="#rivalidad-2021">⚔️ Rivalidad 2021</a></li>
+            <li><a href="#circuitos">🌍 Circuitos</a></li>
+            <li><a href="#curiosidades">🦁 Curiosidades</a></li>
+            <li><a href="#companeros">👥 Compañeros</a></li>
+            <li><a href="galeria.html">📸 Galería</a></li>
+            <li><a href="#juegos">🎮 Minijuegos</a></li>
+          </ul>
+          <div class="sidenav-actions">
+            <button class="theme-btn sound-btn js-sound-toggle" aria-label="Reproducir sonido" aria-pressed="false">🔊</button>
+            <button class="theme-btn js-theme-toggle" aria-label="Cambiar tema">🌙</button>
+          </div>
+        </aside>
+
+        <main class="col-sm-9 content-main">
+          <div class="page-toolbar" id="page-toolbar" hidden>
+            <button type="button" class="back-hub-btn" id="back-hub">← Todas las secciones</button>
+            <span class="page-toolbar-title" id="page-toolbar-title"></span>
+          </div>
+
+          <header id="inicio">
+            <div class="header-flag-bg"></div>
+            <div class="header-overlay"></div>
+            <div class="header-content">
+              <h1>MAX VERSTAPPEN</h1>
+              <p class="subtitle">simply lovely</p>
+            </div>
+          </header>
+
+          <div class="hub" id="hub">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="well dashboard-welcome">
+                  <h2>Dashboard</h2>
+                  <p class="hub-intro">Explorá la trayectoria completa de Max Verstappen: biografía, estadísticas actualizadas, todos los circuitos con sus victorias, gráficos por temporada, momentos clave y más. <strong>Datos actualizados a septiembre de 2026.</strong></p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-3 col-xs-6"><div class="well stat-well"><h4>Títulos</h4><span class="stat-number">4</span><span class="stat-well-note">Mundiales (2021-24)</span></div></div>
+              <div class="col-sm-6 col-md-3 col-xs-6"><div class="well stat-well"><h4>Victorias</h4><span class="stat-number">74</span><span class="stat-well-note">En Grandes Premios</span></div></div>
+              <div class="col-sm-6 col-md-3 col-xs-6"><div class="well stat-well"><h4>Podios</h4><span class="stat-number">139</span><span class="stat-well-note">En carrera</span></div></div>
+              <div class="col-sm-6 col-md-3 col-xs-6"><div class="well stat-well"><h4>Poles</h4><span class="stat-number">50</span><span class="stat-well-note">Pole positions</span></div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="biografia"><span class="hub-icon">📖</span><span class="hub-title">Biografía</span><span class="hub-desc">Origen, familia y camino a la F1</span></button></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="estadisticas"><span class="hub-icon">📊</span><span class="hub-title">Estadísticas</span><span class="hub-desc">Números, récords y gráfica de victorias</span></button></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="trayectoria"><span class="hub-icon">🕒</span><span class="hub-title">Trayectoria</span><span class="hub-desc">Hitos desde 2015 hasta 2026</span></button></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="rivalidad-2021"><span class="hub-icon">⚔️</span><span class="hub-title">Rivalidad 2021</span><span class="hub-desc">La batalla con Hamilton</span></button></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="circuitos"><span class="hub-icon">🌍</span><span class="hub-title">Circuitos</span><span class="hub-desc">Todos los circuitos con sus victorias</span></button></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="curiosidades"><span class="hub-icon">🦁</span><span class="hub-title">Curiosidades</span><span class="hub-desc">Datos, frases y momentos únicos</span></button></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="companeros"><span class="hub-icon">👥</span><span class="hub-title">Compañeros</span><span class="hub-desc">Compañeros de equipo en Red Bull</span></button></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><a href="galeria.html" class="well hub-card" style="display:block;text-decoration:none;color:inherit;"><span class="hub-icon">📸</span><span class="hub-title">Galería</span><span class="hub-desc">Carrusel de fotos (página aparte)</span></a></div>
+              <div class="col-sm-6 col-md-4 col-xs-6"><button type="button" class="well hub-card" data-page="juegos"><span class="hub-icon">🎮</span><span class="hub-title">Minijuegos</span><span class="hub-desc">Reflejos, memoria y trivia</span></button></div>
+            </div>
+          </div>
+
+          <section class="intro-section" data-step="01" id="biografia">
+            <h2>Biografía</h2>
+            <div class="bio-row">
+              <div class="bio-image"><img src="max_imagenesyvideos/maxverstappenenmonoplaza.jpg" alt="Max Verstappen en el monoplaza" /></div>
+              <div class="bio-text">
+                <p><strong>Max Emilian Verstappen</strong> nació el 30 de septiembre de 1997 en Hasselt, Bélgica, y compite bajo bandera neerlandesa. Es hijo del expiloto de Fórmula 1 <strong>Jos Verstappen</strong> y de la exkartista belga <strong>Sophie Kumpen</strong>, lo que lo vinculó al automovilismo desde muy pequeño.</p>
+                <p>Tras una trayectoria brillante en karting (campeonatos europeos y mundiales), dio el salto a monoplazas y rápidamente llamó la atención por su velocidad natural, agresividad controlada y madurez en pista. En 2015 debutó en Fórmula 1 con Toro Rosso con apenas 17 años, convirtiéndose en el piloto más joven en disputar un Gran Premio.</p>
+                <p>Su ascenso fue meteórico: en 2016 fue promovido a Red Bull Racing y ganó en su primera carrera con el equipo (España), siendo el ganador más joven de la historia de la F1. Desde entonces se consolidó como una de las grandes figuras de la era moderna, logrando cuatro campeonatos mundiales consecutivos (2021–2024) y batiendo múltiples récords de victorias, podios y dominio en una temporada.</p>
+                <p>Conocido por el apodo “Mad Max” en sus inicios y por su estilo de conducción al límite, Verstappen combina talento puro, lectura estratégica de carrera y una capacidad excepcional para rendir bajo presión. En 2026 continúa compitiendo con Red Bull Racing (n.º 3), manteniéndose como protagonista en la lucha por las victorias.</p>
+              </div>
+            </div>
+          </section>
+          <section class="stats-section" id="estadisticas">
+            <h2>Estadísticas</h2>
+            <p class="section-desc" style="margin-bottom:18px;">Datos actualizados a septiembre de 2026</p>
+            <div class="stats-grid">
+              <div class="stat-card"><span class="stat-number">4</span><span class="stat-label">Campeonatos</span></div>
+              <div class="stat-card"><span class="stat-number">74</span><span class="stat-label">Victorias</span></div>
+              <div class="stat-card"><span class="stat-number">139</span><span class="stat-label">Podios</span></div>
+              <div class="stat-card"><span class="stat-number">50</span><span class="stat-label">Poles</span></div>
+              <div class="stat-card"><span class="stat-number">251</span><span class="stat-label">Grandes Premios</span></div>
+              <div class="stat-card"><span class="stat-number">27</span><span class="stat-label">Circuitos con victoria</span></div>
+            </div>
+
+            <h3 style="color:var(--accent-yellow); margin-top:28px; margin-bottom:14px;">Max en Números</h3>
+            <div class="wins-highlights">
+              <div class="wins-highlight-card">
+                <span class="wins-highlight-year">2021</span>
+                <span class="wins-highlight-label">Primer campeonato mundial</span>
+              </div>
+              <div class="wins-highlight-card">
+                <span class="wins-highlight-year">2023</span>
+                <span class="wins-highlight-label">19 victorias en una temporada</span>
+              </div>
+              <div class="wins-highlight-card">
+                <span class="wins-highlight-year">2023</span>
+                <span class="wins-highlight-label">Récord de 10 victorias consecutivas</span>
+              </div>
+            </div>
+
+            <div class="wins-chart" aria-label="Victorias por temporada 2015-2026">
+              <div class="wins-bar"><span class="wins-bar-value">0</span><div class="wins-bar-fill" style="--wins:0"></div><span class="wins-bar-year">2015</span></div>
+              <div class="wins-bar"><span class="wins-bar-value">1</span><div class="wins-bar-fill" style="--wins:1"></div><span class="wins-bar-year">2016</span></div>
+              <div class="wins-bar"><span class="wins-bar-value">2</span><div class="wins-bar-fill" style="--wins:2"></div><span class="wins-bar-year">2017</span></div>
+              <div class="wins-bar"><span class="wins-bar-value">2</span><div class="wins-bar-fill" style="--wins:2"></div><span class="wins-bar-year">2018</span></div>
+              <div class="wins-bar"><span class="wins-bar-value">3</span><div class="wins-bar-fill" style="--wins:3"></div><span class="wins-bar-year">2019</span></div>
+              <div class="wins-bar"><span class="wins-bar-value">2</span><div class="wins-bar-fill" style="--wins:2"></div><span class="wins-bar-year">2020</span></div>
+              <div class="wins-bar champion-year"><span class="wins-bar-value">10</span><div class="wins-bar-fill" style="--wins:10"></div><span class="wins-bar-year">2021</span></div>
+              <div class="wins-bar champion-year"><span class="wins-bar-value">15</span><div class="wins-bar-fill" style="--wins:15"></div><span class="wins-bar-year">2022</span></div>
+              <div class="wins-bar champion-year"><span class="wins-bar-value">19</span><div class="wins-bar-fill" style="--wins:19"></div><span class="wins-bar-year">2023</span></div>
+              <div class="wins-bar champion-year"><span class="wins-bar-value">9</span><div class="wins-bar-fill" style="--wins:9"></div><span class="wins-bar-year">2024</span></div>
+              <div class="wins-bar"><span class="wins-bar-value">8</span><div class="wins-bar-fill" style="--wins:8"></div><span class="wins-bar-year">2025</span></div>
+              <div class="wins-bar in-progress"><span class="wins-bar-value">3</span><div class="wins-bar-fill" style="--wins:3"></div><span class="wins-bar-year">2026*</span></div>
+            </div>
+            <p class="section-desc" style="margin-top:10px;">* Temporada 2026 en curso. Las barras doradas corresponden a los años de campeonato (2021, 2022, 2023, 2024).</p>
+          </section>
+          <section class="timeline-section" data-step="02" id="trayectoria">
+            <h2>Trayectoria</h2>
+            <div class="trayectoria-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+              <article class="well" style="margin:0;">
+                <img src="max_imagenesyvideos/max_debut.jpg" alt="Max Verstappen debut 2015" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:10px;" />
+                <h3 style="margin-top:0;color:var(--accent-yellow);">2015 — Debut</h3>
+                <p>Debut en Fórmula 1 con Toro Rosso en Melbourne con solo 17 años, convirtiéndose en el piloto más joven en disputar un Gran Premio.</p>
+              </article>
+              <article class="well" style="margin:0;">
+                <img src="max_imagenesyvideos/max_2016-2020.jpg" alt="Max Verstappen 2016-2020" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:10px;" />
+                <h3 style="margin-top:0;color:var(--accent-yellow);">2016–2020 — Sobrevivir</h3>
+                <p>Ascenso a Red Bull, primera victoria en España 2016 y años de crecimiento, aprendizaje y lucha constante para consolidarse entre los mejores.</p>
+              </article>
+              <article class="well" style="margin:0;">
+                <img src="max_imagenesyvideos/max_2021.jpg" alt="Max Verstappen primer campeonato 2021" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:10px;" />
+                <h3 style="margin-top:0;color:var(--accent-yellow);">2021 — Primer campeonato</h3>
+                <p>Temporada histórica frente a Lewis Hamilton. Tras una batalla intensa hasta la última vuelta en Abu Dabi, logra su primer título mundial.</p>
+              </article>
+              <article class="well" style="margin:0;">
+                <img src="max_imagenesyvideos/max_2022-2024.jpg" alt="Max Verstappen dominación 2022-2024" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:10px;" />
+                <h3 style="margin-top:0;color:var(--accent-yellow);">2022–2024 — Dominación absoluta</h3>
+                <p>Cuatro títulos consecutivos (2021-2024) con años de dominio récord, victorias aplastantes y una de las etapas más exitosas de la F1 moderna.</p>
+              </article>
+              <article class="well" style="margin:0;">
+                <img src="max_imagenesyvideos/max_2025.jpg" alt="Max Verstappen remontada 2025" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:10px;" />
+                <h3 style="margin-top:0;color:var(--accent-yellow);">2025 — Remontada</h3>
+                <p>Temporada de gran remontada y pelea hasta el final, mostrando competitividad y carácter en una campaña muy disputada.</p>
+              </article>
+              <article class="well" style="margin:0;">
+                <img src="max_imagenesyvideos/max_2026.jpg" alt="Max Verstappen 2026" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:10px;" />
+                <h3 style="margin-top:0;color:var(--accent-yellow);">2026 — Pelea el subcampeonato</h3>
+                <p>Por ahora se mantiene en la lucha y pelea el subcampeonato, con actuaciones destacadas en el inicio de la nueva era reglamentaria.</p>
+              </article>
+            </div>
+          </section>
+          <section class="timeline-section rivalry-section" id="rivalidad-2021">
+            <h2>Rivalidad 2021: Verstappen vs Hamilton</h2>
+            <p class="section-desc">La temporada 2021 fue una de las más intensas de la historia de la Fórmula 1. Max Verstappen y Lewis Hamilton protagonizaron un duelo rueda a rueda durante 22 Grandes Premios, con constantes cambios en el liderato y momentos que marcaron el campeonato.</p>
+            <div class="bio-row" style="margin-top:16px; align-items:flex-start;">
+              <div class="bio-image"><img src="max_imagenesyvideos/max_2021.jpg" alt="Max Verstappen en 2021" /></div>
+              <div class="bio-text">
+                <p>Desde el inicio de la temporada, Red Bull y Mercedes llevaron la batalla al límite en pista y en estrategia. Los roces, incidentes y definiciones polémicas alimentaron una rivalidad que se resolvió recién en la última vuelta del último Gran Premio.</p>
+                <p>Verstappen llegó a Abu Dabi empatado en puntos con Hamilton y, tras un final controvertido, logró su <strong>primer campeonato mundial</strong>, iniciando una nueva era en la Fórmula 1.</p>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:20px;">
+              <div class="col-sm-12" style="margin-bottom:18px;"><div class="well"><h3 style="margin-top:0;color:var(--accent-yellow);">Gran Premio de Gran Bretaña (video)</h3>
+                  <p>La colisión en la curva Copse durante la primera vuelta, donde el coche de Hamilton impactó a Verstappen a más de 300 km/h, enviándolo contra los muros y marcando el inicio de una rivalidad agresiva.</p>
+                  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000;">
+                    <source src="max_imagenesyvideos/silverstone.mp4" type="video/mp4" />
+                    Tu navegador no soporta el video.
+                  </video>
+                </div>
+              </div>
+              <div class="col-sm-12" style="margin-bottom:18px;"><div class="well"><h3 style="margin-top:0;color:var(--accent-yellow);">Gran Premio de Monza (video)</h3>
+                  <p>Otro accidente entre ambos pilotos en la primera chicana tras las paradas en boxes, donde Verstappen saltó por encima del monoplaza de Hamilton, dejando a ambos fuera de carrera y aumentando la tensión.</p>
+                  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000;">
+                    <source src="max_imagenesyvideos/monza.mp4" type="video/mp4" />
+                    Tu navegador no soporta el video.
+                  </video>
+                </div>
+              </div>
+              <div class="col-sm-12" style="margin-bottom:18px;"><div class="well"><h3 style="margin-top:0;color:var(--accent-yellow);">Gran Premio de Arabia Saudí (video)</h3>
+                  <p>Una carrera caótica con múltiples banderas rojas donde Hamilton ganó para empatar el campeonato a 369.5 puntos, tras un incidente en la segunda salida donde Verstappen forzó a Hamilton fuera de la pista.</p>
+                  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000;">
+                    <source src="max_imagenesyvideos/arabia_saudi.mp4" type="video/mp4" />
+                    Tu navegador no soporta el video.
+                  </video>
+                </div>
+              </div>
+              <div class="col-sm-12" style="margin-bottom:18px;"><div class="well"><h3 style="margin-top:0;color:var(--accent-yellow);">Gran Premio de Abu Dabi (video)</h3>
+                  <p>La decisión controversial de la FIA de permitir que solo los coches retrasados adelantaran a los líderes durante el coche de seguridad final, lo que permitió a Verstappen (con neumáticos nuevos) adelantar a Hamilton en la última vuelta para ganar su primer título mundial.</p>
+                  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000;">
+                    <source src="max_imagenesyvideos/abu dabi.mp4" type="video/mp4" />
+                    Tu navegador no soporta el video.
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <div class="bio-row" style="margin-top:8px;">
+              <div class="bio-image"><img src="max_imagenesyvideos/max_campeon_2021.jpg" alt="Max Verstappen campeón 2021" /></div>
+              <div class="bio-text">
+                <p><strong>El desenlace:</strong> en Yas Marina, el título se definió en la última vuelta. Verstappen aprovechó el reinicio, adelantó a Hamilton y cruzó la meta como campeón del mundo por primera vez, cerrando una de las rivalidades más recordadas de la Fórmula 1.</p>
+              </div>
+            </div>
+          </section>
+          <section class="map-section" id="circuitos">
+            <h2>Circuitos y victorias</h2>
+            <p class="section-desc">Todos los circuitos donde Max Verstappen ha ganado en Fórmula 1, con su número de victorias. Hacé clic en cada circuito para ver un mapa con la ubicación de la pista. (Total: 74 victorias en 27 circuitos)</p>
+            <div class="circuit-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;">
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Autódromo Hermanos Rodríguez, Mexico City" data-query="Autodromo Hermanos Rodriguez Formula 1 track"><strong>Mexico City (Autódromo H. Rodríguez)</strong><span>6 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Red Bull Ring, Spielberg" data-query="Red Bull Ring Spielberg Formula 1 track"><strong>Spielberg (Red Bull Ring)</strong><span>5 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Yas Marina Circuit, Abu Dhabi" data-query="Yas Marina Circuit Abu Dhabi Formula 1 track"><strong>Yas Marina (Abu Dabi)</strong><span>5 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Autodromo Enzo e Dino Ferrari, Imola" data-query="Autodromo Enzo e Dino Ferrari Imola Formula 1 track"><strong>Imola (Emilia-Romaña)</strong><span>4 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Suzuka International Racing Course" data-query="Suzuka Circuit Formula 1 track"><strong>Suzuka (Japón)</strong><span>4 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Circuit de Barcelona-Catalunya" data-query="Circuit de Barcelona-Catalunya Formula 1 track"><strong>Barcelona-Catalunya (España)</strong><span>4 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Circuit of the Americas, Austin" data-query="Circuit of the Americas Austin Formula 1 track"><strong>Austin (COTA, EE.UU.)</strong><span>4 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Lusail International Circuit, Qatar" data-query="Lusail International Circuit Qatar Formula 1 track"><strong>Lusail (Catar)</strong><span>3 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Autódromo José Carlos Pace, Interlagos" data-query="Interlagos Circuit Sao Paulo Formula 1 track"><strong>Interlagos (São Paulo)</strong><span>3 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Autodromo Nazionale Monza" data-query="Autodromo Nazionale Monza Formula 1 track"><strong>Monza (Italia)</strong><span>3 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Circuit Gilles Villeneuve, Montreal" data-query="Circuit Gilles Villeneuve Montreal Formula 1 track"><strong>Montreal (Canadá)</strong><span>3 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Circuit Zandvoort" data-query="Circuit Zandvoort Formula 1 track"><strong>Zandvoort (Países Bajos)</strong><span>3 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Circuit de Spa-Francorchamps" data-query="Circuit de Spa-Francorchamps Formula 1 track"><strong>Spa-Francorchamps (Bélgica)</strong><span>3 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Las Vegas Strip Circuit" data-query="Las Vegas Strip Circuit Formula 1 track"><strong>Las Vegas</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Baku City Circuit" data-query="Baku City Circuit Formula 1 track"><strong>Baku (Azerbaiyán)</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Jeddah Corniche Circuit" data-query="Jeddah Corniche Circuit Formula 1 track"><strong>Jeddah (Arabia Saudita)</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Bahrain International Circuit, Sakhir" data-query="Bahrain International Circuit Sakhir Formula 1 track"><strong>Sakhir (Bahréin)</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Hungaroring" data-query="Hungaroring Formula 1 track"><strong>Hungaroring (Hungría)</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Silverstone Circuit" data-query="Silverstone Circuit Formula 1 track"><strong>Silverstone (Gran Bretaña)</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Circuit de Monaco" data-query="Circuit de Monaco Formula 1 track"><strong>Mónaco</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Miami International Autodrome" data-query="Miami International Autodrome Formula 1 track"><strong>Miami</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Circuit Paul Ricard, Le Castellet" data-query="Circuit Paul Ricard Formula 1 track"><strong>Le Castellet (Francia)</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Sepang International Circuit, Malaysia" data-query="Sepang International Circuit Formula 1 track"><strong>Sepang/Kuala Lumpur (Malasia)</strong><span>2 victorias</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Marina Bay Street Circuit, Singapore" data-query="Marina Bay Street Circuit Singapore Formula 1 track"><strong>Singapore (Marina Bay)</strong><span>1 victoria</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Shanghai International Circuit" data-query="Shanghai International Circuit Formula 1 track"><strong>Shanghai (China)</strong><span>1 victoria</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Albert Park Circuit, Melbourne" data-query="Albert Park Circuit Melbourne Formula 1 track"><strong>Melbourne (Australia)</strong><span>1 victoria</span></button>
+              <button type="button" class="circuit-card circuit-map-btn" data-name="Hockenheimring" data-query="Hockenheimring Formula 1 track"><strong>Hockenheim (Alemania)</strong><span>1 victoria</span></button>
+            </div>
+          </section>
+
+          <section class="trivia-section" data-step="03" id="curiosidades">
+            <h2>Curiosidades</h2>
+            <div class="trivia-content">
+              <div class="trivia-image"><img src="max_imagenesyvideos/casco_simply_lovely.jpg" alt="Casco de Max Verstappen" /></div>
+              <ul class="trivia-list">
+                <li>Debutó en F1 con 17 años, 5 meses y 15 días, siendo el piloto más joven en la historia de la categoría.</li>
+                <li>Es el ganador más joven de un Gran Premio (España 2016, con Red Bull).</li>
+                <li>Su radio “<strong>Simply lovely</strong>” tras victorias y poles se convirtió en una marca personal.</li>
+                <li>Usa el dorsal <strong>3</strong> desde 2026 (antes fue 33 y luego el 1 como campeón).</li>
+                <li>Es un apasionado del simracing y compite a alto nivel en carreras virtuales de resistencia.</li>
+                <li>En 2023 logró una de las temporadas más dominantes de la historia con 19 victorias y 10 consecutivas.</li>
+                <li>Nació en Bélgica pero eligió competir con nacionalidad deportiva neerlandesa.</li>
+                <li>La afición neerlandesa, conocida como la “Orange Army”, lo acompaña masivamente en circuitos como Zandvoort y Spa.</li>
+              </ul>
+            </div>
+            <div class="bio-row" style="margin-top:18px;">
+              <div class="bio-image"><img src="max_imagenesyvideos/redbull-team.jpg" alt="Equipo Red Bull Racing" /></div>
+              <div class="bio-text">
+                <p>Más allá de los números, Verstappen destaca por su capacidad para gestionar neumáticos, adaptarse a condiciones cambiantes y ejecutar adelantamientos decisivos. Su relación con los ingenieros y su enfoque metódico en cada fin de semana han sido claves en la era exitosa de Red Bull.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="teammates-section" id="companeros">
+            <h2>Compañeros de equipo</h2>
+            <p class="section-desc">Compañeros con los que compartió equipo en Red Bull Racing en Fórmula 1.</p>
+            <div class="teammates-grid" id="teammates-grid">
+              <button type="button" class="teammate-card" data-mate="checo"><strong>Sergio Pérez</strong><span>2021–2024</span></button>
+              <button type="button" class="teammate-card" data-mate="ricciardo"><strong>Daniel Ricciardo</strong><span>2016–2018</span></button>
+              <button type="button" class="teammate-card" data-mate="albon"><strong>Alex Albon</strong><span>2019–2020</span></button>
+              <button type="button" class="teammate-card" data-mate="gasly"><strong>Pierre Gasly</strong><span>2019</span></button>
+            </div>
+            <div id="teammate-pages" class="teammate-pages" hidden>
+              <button type="button" class="back-mates-btn" id="back-mates">← Volver a compañeros</button>
+              <article class="teammate-page" data-mate-page="checo" hidden>
+                <h3>Sergio “Checo” Pérez</h3>
+                <p>Compañero de Max entre 2021 y 2024. Fue una pieza importante en los campeonatos de constructores de Red Bull, sumando victorias, podios y desempeños estratégicos clave, especialmente en defensas y gestión de carrera que apoyaron las luchas por el título.</p>
+              </article>
+              <article class="teammate-page" data-mate-page="ricciardo" hidden>
+                <h3>Daniel Ricciardo</h3>
+                <p>Compartió garaje con Verstappen desde 2016 hasta 2018. Fue una etapa de alta competitividad interna y grandes batallas en pista, mientras Red Bull se consolidaba como aspirante constante a victorias.</p>
+              </article>
+              <article class="teammate-page" data-mate-page="albon" hidden>
+                <h3>Alex Albon</h3>
+                <p>Compañero durante parte de 2019 y toda la temporada 2020. Aportó puntos importantes para el equipo en un período de transición y desarrollo del monoplaza.</p>
+              </article>
+              <article class="teammate-page" data-mate-page="gasly" hidden>
+                <h3>Pierre Gasly</h3>
+                <p>Fue compañero de Max en la primera mitad de 2019. Tras ese período, Red Bull realizó cambios en su alineación durante la temporada.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="juegos">
+            <h2>Zona de minijuegos</h2>
+            <p class="game-intro">Cinco juegos para probar reflejos, memoria, conocimiento, lógica y puntería. Tus mejores marcas quedan guardadas en tu navegador.</p>
+            <div class="games-grid">
+              <article class="game-box" id="reflejos">
+                <h3>🚦 Reflejos de largada</h3>
+                <p class="game-desc">Se encienden 5 luces rojas. Cuando se apaguen todas, tocá el botón lo más rápido que puedas. Si lo tocás antes, es salida en falso.</p>
+                <div class="lights" id="lights" aria-hidden="true"><span class="light"></span><span class="light"></span><span class="light"></span><span class="light"></span><span class="light"></span></div>
+                <button class="game-btn" id="reaction-btn" type="button">Empezar</button>
+                <p class="game-msg" id="reaction-msg" aria-live="polite"></p>
+                <p class="game-stats">Mejor tiempo: <span id="reaction-best">--</span></p>
+              </article>
+
+              <article class="game-box" id="memoria">
+                <h3>🧠 Memoria de boxes</h3>
+                <p class="game-desc">Encontrá las 8 parejas en la menor cantidad de movimientos y tiempo. Tocá las cartas para darlas vuelta.</p>
+                <div class="mem-grid" id="mem-grid"></div>
+                <p class="game-msg" id="memory-msg" aria-live="polite"></p>
+                <p class="game-stats">Movimientos: <span id="memory-moves">0</span> · Tiempo: <span id="memory-time">0s</span></p>
+                <p class="game-stats">Mejor: <span id="memory-best">--</span></p>
+                <button class="game-btn" id="memory-reset" type="button">Reiniciar</button>
+              </article>
+
+              <article class="game-box" id="trivia-juego">
+                <h3>❓ Trivia: ¿cuánto sabés de Max?</h3>
+                <p class="game-desc">Respondé las preguntas y sumá puntos. Las opciones se mezclan en cada partida.</p>
+                <div id="quiz-box" aria-live="polite"></div>
+              </article>
+
+              <article class="game-box" id="mayor-menor">
+                <h3>📊 Mayor o menor</h3>
+                <p class="game-desc">Compará dos temporadas de Max y elegí cuál tuvo <strong>más victorias</strong>. Sumá la mayor racha de aciertos posible.</p>
+                <div id="higher-box" aria-live="polite"></div>
+              </article>
+
+              <article class="game-box" id="atrapa-trofeo">
+                <h3>🏆 Atrapa el trofeo</h3>
+                <p class="game-desc">Hacé clic o tocá el trofeo antes de que se mueva. Tenés 20 segundos para conseguir la mayor cantidad de puntos.</p>
+                <div id="catch-arena" class="catch-arena" aria-label="Área de juego">
+                  <button type="button" id="catch-target" class="catch-target" aria-label="Trofeo">🏆</button>
+                </div>
+                <p class="game-msg" id="catch-msg" aria-live="polite"></p>
+                <p class="game-stats">Tiempo: <span id="catch-time">20</span>s · Puntos: <span id="catch-score">0</span> · Mejor: <span id="catch-best">--</span></p>
+                <button class="game-btn" id="catch-btn" type="button">Empezar</button>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-container">
+        <p>&copy; 2026 Página Fan de Max Verstappen. Actualizado al 16 de noviembre de 2026.</p>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/mirco_martinezz/" target="_blank" rel="noopener noreferrer" class="footer-social-link">Instagram</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+      function closeModal() { const m = document.getElementById("image-modal"); if (m) m.classList.remove("show"); }
+      function closeTitlesModal() { const m = document.getElementById("titles-modal"); if (m) m.classList.remove("show"); }
+      function openTitlesModal() { const m = document.getElementById("titles-modal"); if (m) { m.classList.add("show"); m.focus(); } }
+      function closeCircuitModal() { const m = document.getElementById("circuit-map-modal"); const f = document.getElementById("circuit-map-iframe"); if (f) f.src = ""; if (m) m.classList.remove("show"); }
+      function openCircuitMap(name, query) {
+        const m = document.getElementById("circuit-map-modal");
+        const f = document.getElementById("circuit-map-iframe");
+        const t = document.getElementById("circuit-map-title");
+        const s = document.getElementById("circuit-map-subtitle");
+        const ext = document.getElementById("circuit-map-external");
+        if (!m || !f) return;
+        const q = query || name;
+        const embed = "https://www.google.com/maps?q=" + encodeURIComponent(q) + "&output=embed";
+        const link = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+        if (t) t.textContent = name || "Circuito";
+        if (s) s.textContent = "Mapa de la pista y ubicación del circuito.";
+        if (ext) ext.href = link;
+        f.src = embed;
+        m.classList.add("show");
+        m.focus();
+      }
+
+      function initThemeToggles() {
+        const toggles = document.querySelectorAll(".js-theme-toggle");
+        function applyTheme(theme) {
+          document.documentElement.setAttribute("data-theme", theme);
+          localStorage.setItem("theme", theme);
+          toggles.forEach((btn) => (btn.textContent = theme === "dark" ? "🌙" : "☀️"));
+        }
+        applyTheme(document.documentElement.getAttribute("data-theme") || "dark");
+        toggles.forEach((btn) => btn.addEventListener("click", () => {
+          applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+        }));
+      }
+
+      function initSoundToggles() {
+        const audio = document.getElementById("lovely-audio");
+        document.querySelectorAll(".js-sound-toggle").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            if (!audio) return;
+            if (audio.paused) {
+              try { audio.currentTime = 0; await audio.play(); btn.textContent = "🔈"; btn.setAttribute("aria-pressed","true"); } catch(e){}
+            } else { audio.pause(); btn.textContent = "🔊"; btn.setAttribute("aria-pressed","false"); }
+          });
+        });
+      }
+
+      function initNavToggle() {
+        const toggle = document.getElementById("nav-toggle");
+        const links = document.getElementById("nav-links");
+        if (!toggle || !links) return;
+        toggle.addEventListener("click", () => {
+          const open = links.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => {
+          links.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+        }));
+      }
+
+      function initHubNavigation() {
+        const pageNames = {
+          biografia: "Biografía", estadisticas: "Estadísticas", trayectoria: "Trayectoria",
+          "rivalidad-2021": "Rivalidad 2021", circuitos: "Circuitos", curiosidades: "Curiosidades",
+          companeros: "Compañeros", juegos: "Minijuegos"
+        };
+        const toolbar = document.getElementById("page-toolbar");
+        const titleEl = document.getElementById("page-toolbar-title");
+        const backHub = document.getElementById("back-hub");
+        const sections = Array.from(document.querySelectorAll("main > section[id]"));
+
+        function setActiveLinks(id) {
+          document.querySelectorAll(".nav-links a, .sidenav-links a").forEach((a) => {
+            const href = a.getAttribute("href") || "";
+            a.classList.toggle("active", href === "#" + id);
+          });
+        }
+        function openPage(id) {
+          if (!id || id === "inicio") {
+            document.body.classList.remove("page-open");
+            sections.forEach((s) => s.classList.remove("is-active"));
+            if (toolbar) toolbar.hidden = true;
+            setActiveLinks("inicio");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+          }
+          if (id === "galeria") { window.location.href = "galeria.html"; return; }
+          const target = document.getElementById(id);
+          if (!target || !target.matches("main > section")) return;
+          document.body.classList.add("page-open");
+          sections.forEach((s) => s.classList.toggle("is-active", s === target));
+          if (toolbar) toolbar.hidden = false;
+          if (titleEl) titleEl.textContent = pageNames[id] || id;
+          setActiveLinks(id);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        document.querySelectorAll(".hub-card[data-page]").forEach((btn) => btn.addEventListener("click", () => openPage(btn.dataset.page)));
+        if (backHub) backHub.addEventListener("click", () => { location.hash = "inicio"; });
+        window.addEventListener("hashchange", () => openPage((location.hash || "#inicio").replace("#", "")));
+        openPage((location.hash || "#inicio").replace("#", ""));
+      }
+
+      function initModals() {
+        document.querySelectorAll(".modal").forEach((m) => {
+          m.addEventListener("click", (e) => {
+            if (e.target === m || e.target.classList.contains("modal-wrapper")) {
+              m.classList.remove("show");
+              const f = m.querySelector("iframe"); if (f) f.src = "";
+            }
+          });
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") document.querySelectorAll(".modal.show").forEach((m) => m.classList.remove("show"));
+        });
+      }
+
+      function initTeammates() {
+        const grid = document.getElementById("teammates-grid");
+        const wrap = document.getElementById("teammate-pages");
+        const back = document.getElementById("back-mates");
+        if (!grid || !wrap) return;
+        function showMate(id) { grid.hidden = true; wrap.hidden = false; wrap.querySelectorAll(".teammate-page").forEach((p) => p.hidden = p.dataset.matePage !== id); }
+        function closeMates() { grid.hidden = false; wrap.hidden = true; wrap.querySelectorAll(".teammate-page").forEach((p) => p.hidden = true); }
+        grid.querySelectorAll(".teammate-card").forEach((b) => b.addEventListener("click", () => showMate(b.dataset.mate)));
+        if (back) back.addEventListener("click", closeMates);
+      }
+
+      function initBackToTop() {
+        const btn = document.getElementById("back-to-top");
+        if (!btn) return;
+        window.addEventListener("scroll", () => btn.classList.toggle("show", window.scrollY > 400));
+        btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+      }
+
+      function initImageModal() {
+        const modal = document.getElementById("image-modal");
+        const modalImg = document.getElementById("modal-img");
+        if (!modal || !modalImg) return;
+        document.querySelectorAll("main img, .bio-image img, .trivia-image img").forEach((img) => {
+          img.style.cursor = "pointer";
+          img.addEventListener("click", () => {
+            modal.classList.add("show");
+            modalImg.src = img.src;
+            modal.focus();
+          });
+        });
+      }
+
+      document.querySelectorAll("img").forEach((img) => {
+        img.addEventListener("error", function handleImgError() {
+          this.removeEventListener("error", handleImgError);
+          this.classList.add("img-fallback");
+          const texto = (this.alt || "Imagen no disponible").replace(/</g, "");
+          this.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260"><rect width="100%" height="100%" fill="#0b1329"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="16">' + texto + '</text></svg>');
+        }, { once: true });
+      });
+
+      function initCircuitMaps() {
+        document.querySelectorAll(".circuit-map-btn").forEach((btn) => {
+          btn.addEventListener("click", () => openCircuitMap(btn.dataset.name, btn.dataset.query));
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initThemeToggles();
+        initSoundToggles();
+        initNavToggle();
+        initHubNavigation();
+        initModals();
+        initTeammates();
+        initBackToTop();
+        initImageModal();
+        initCircuitMaps();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+        if (document.querySelector(".modal.show")) return;
+        if (!document.body.classList.contains("page-open")) return;
+        const grid = document.getElementById("teammates-grid");
+        if (grid && grid.hidden) { document.getElementById("back-mates")?.click(); return; }
+        location.hash = "inicio";
+      });
+    </script>
+    <script src="juegos.js"></script>
+  </body>
+</html>
