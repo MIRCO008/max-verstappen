@@ -2401,3 +2401,89 @@ body.page-open main > section.is-active {
   .games-hero-overlay { padding: 18px; gap: 4px; }
   .games-hero .game-intro { font-size: 0.92rem; }
 }
+
+/* --- Tema claro: cabecera principal y bloques oscuros --- */
+[data-theme="light"] header {
+  background-color: var(--bg-dark);
+  border-bottom-color: rgba(15, 23, 42, 0.12);
+}
+[data-theme="light"] .header-flag-bg {
+  opacity: 0.32;
+}
+[data-theme="light"] .header-overlay {
+  background-color: rgba(248, 250, 252, 0.9);
+}
+[data-theme="light"] header::after {
+  background-image: repeating-linear-gradient(
+    115deg,
+    transparent 0px,
+    transparent 38px,
+    rgba(15, 23, 42, 0.05) 38px,
+    rgba(15, 23, 42, 0.05) 40px
+  );
+}
+[data-theme="light"] header h1 {
+  color: var(--text-light);
+  text-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+}
+[data-theme="light"] .subtitle {
+  color: var(--accent-red);
+  text-shadow: none;
+}
+
+/* Barra "Todas las secciones" (móvil) */
+[data-theme="light"] .page-toolbar {
+  background: rgba(248, 250, 252, 0.92);
+  border-bottom-color: rgba(255, 27, 77, 0.28);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* Trayectoria: acordeones */
+[data-theme="light"] .timeline-accordion-item {
+  background-color: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+/* Pie de foto del modal de imagen */
+[data-theme="light"] .modal-caption {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-top: 2px solid var(--accent-red);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+}
+/* Tema claro: textos en amarillo/cian que quedaban ilegibles sobre fondos claros */
+[data-theme="light"] .games-grid h3,
+[data-theme="light"] .teammate-page h3,
+[data-theme="light"] .game-btn,
+[data-theme="light"] .sidenav-links > li > a.active,
+[data-theme="light"] .timeline-accordion-item[open] .accordion-header,
+[data-theme="light"] .rivalry-accordion[open] .accordion-header,
+[data-theme="light"] .page-btn:hover,
+[data-theme="light"] .page-btn.active,
+[data-theme="light"] .back-to-top-btn,
+[data-theme="light"] .games-hero-tag {
+  color: #a16207;
+}
+[data-theme="light"] .game-btn,
+[data-theme="light"] .page-btn:hover,
+[data-theme="light"] .page-btn.active {
+  border-color: #a16207;
+}
+[data-theme="light"] .back-to-top-btn {
+  border-color: rgba(161, 98, 7, 0.35);
+}
+[data-theme="light"] .games-hero-tag {
+  border-color: rgba(161, 98, 7, 0.45);
+  background: rgba(161, 98, 7, 0.08);
+}
+[data-theme="light"] .footer-social-link:hover,
+[data-theme="light"] .map-external-link:hover {
+  color: #a16207;
+  border-color: #a16207;
+  box-shadow: none;
+}
+[data-theme="light"] .back-hub-btn,
+[data-theme="light"] .back-mates-btn {
+  color: #0e7490;
+  border-color: #0e7490;
+}
